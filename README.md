@@ -14,8 +14,4 @@ It can create wallets, add money (top-up), and handle payments. I also added glo
 - `POST /api/payments` - Pay someone
 - `GET /api/wallets/{id}/operations` - See history
 
-## How to run:
-Just use the maven wrapper:
-```bash
-./mvnw spring-boot:run
-```
+
