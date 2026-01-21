@@ -1,6 +1,6 @@
 # WalletPay Project
 
-This is my project for Chapter 10. I built a simple REST API for a wallet system called **WalletPay**. 
+I built a simple REST API for a wallet system called **WalletPay**. 
 
 It can create wallets, add money (top-up), and handle payments. I also added global error handling and DTOs as we learned.
 
