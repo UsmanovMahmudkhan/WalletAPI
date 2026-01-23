@@ -5,6 +5,7 @@ public class OperationResponse {
     private int operationID;
     private int walletId;
     private Type type;
+    private String reference;
 
     public OperationResponse() {
     }
@@ -37,5 +38,13 @@ public class OperationResponse {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 }

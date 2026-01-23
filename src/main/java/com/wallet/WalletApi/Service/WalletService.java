@@ -1,8 +1,6 @@
 package com.wallet.WalletApi.Service;
 
-import com.wallet.WalletApi.DTO.CreateWalletRequest;
-import com.wallet.WalletApi.DTO.Wallet;
-import com.wallet.WalletApi.DTO.WalletResponse;
+import com.wallet.WalletApi.DTO.*;
 import com.wallet.WalletApi.Exception.WalletNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +14,7 @@ public class WalletService {
 
     private final ArrayList<WalletResponse>walletResponseArrayList=new ArrayList<>();
     private final ArrayList<Wallet>wallets=new ArrayList<>();
+    private ArrayList<OperationResponse>operationResponses=new ArrayList<>();
 
     public ArrayList<WalletResponse> getWalletResponseArrayList() {
         return walletResponseArrayList;
@@ -69,5 +68,39 @@ public class WalletService {
 
     }
 
+    public WalletResponse update(int id, TopUpRequest request) {
+
+        WalletResponse updatedWallet = null;
+
+        for (WalletResponse w : walletResponseArrayList) {
+            if (w.getId() == id) {
+
+                float newBalance = w.getBalance() + request.getBalance();
+                w.setBalance(newBalance);
+
+                OperationResponse operationResponse = new OperationResponse();
+                operationResponse.setOperationID(Math.abs(new Random().nextInt()));
+                operationResponse.setWalletId(id);
+                operationResponse.setType(Type.TopUp);
+                operationResponse.setReference(request.getReference());
+
+                operationResponses.add(operationResponse);
+
+                updatedWallet = w;
+                break;
+            }
+        }
+
+        if (updatedWallet == null) {
+            throw new WalletNotFoundException();
+        }
+
+        return updatedWallet;
+    }
+
+
+    public ArrayList<OperationResponse> getOperationResponses() {
+        return operationResponses;
+    }
 
 }
